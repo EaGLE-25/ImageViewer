@@ -29,7 +29,7 @@ const useStyles = makeStyles({
   }
 })
 
-function Login(){
+function Login(props){
   const classes = useStyles();
 
   let [username,setUsername] = useState(null);
@@ -40,6 +40,7 @@ function Login(){
 
   let [incorrectCredsHelperVisibility,setIncorrectCredsHelperVisibility] = useState("hide");
   
+
   useEffect(()=>{
     if(username){
       updateUsernameHelper();
@@ -68,6 +69,7 @@ function Login(){
     if((username && password)){
       if(username === mockUsername && password === mockPassword){
         sessionStorage.setItem("access-token",accessToken);
+        props.history.push("/home");
       }else{
         setIncorrectCredsHelperVisibility("show");
       } 

@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './screens/login/Login';
+import ImageViewer from "./common/controller/Controller.js";
+import { BrowserRouter as Router} from "react-router-dom";
 
 ReactDOM.render(
-  <Login/>,
+  <Router>
+    <ImageViewer/>
+  </Router>,
   document.getElementById('root')
 );
 
