@@ -69,6 +69,7 @@ function Login(props){
     if((username && password)){
       if(username === mockUsername && password === mockPassword){
         sessionStorage.setItem("access-token",accessToken);
+        props.changeLoggedInStatusHandler(true);
         props.history.push("/home");
       }else{
         setIncorrectCredsHelperVisibility("show");
