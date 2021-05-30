@@ -1,17 +1,42 @@
-import {useEffect, useState} from "react";
 
-function Home(){
-    // state
-    const [userData,setUserData] = useState(null);
+import {useEffect, useState} from "react";
+import { useHistory, useLocation } from "react-router";
+import Post from "./post/Post";
+import Header from "../../common/header/Header.js";
+
+function Home(props){
+    const history = useHistory();
+    const location = useLocation();
 
     const baseURL = 'https://graph.instagram.com';
     const accessToken = sessionStorage.getItem("access-token");
 
-    const relativeResourceURL = `/me/media?fields=id,caption&access_token=${accessToken}`;
-    const absoluteURL = `${baseURL}${relativeResourceURL}`;
+    // state
+    const [userData,setUserData] = useState(()=>[]);
+    const [userDataCopy,setUserDataCopy] = useState(()=>userData);
+
+    // functions
+    const onSearchHandler = (pattern)=>{
+        const searchResult = userDataCopy.filter((post)=>{
+            if(post.caption !== undefined && post.caption.includes(pattern)){
+                return post;
+            }
+        });
+
+
+        if(pattern === ""){
+            // reset to default
+            setUserData(userDataCopy);
+        }else{
+            setUserData(searchResult);
+        }
+    }
 
     useEffect(()=>{
-        if(!userData){
+        if(userData.length === 0){
+            const getMediaIDsURL = `/me/media?fields=id,caption&access_token=${accessToken}`;
+            const absoluteURL = `${baseURL}${getMediaIDsURL}`;
+
             (async()=>{
                 let response = await fetch(absoluteURL);
                 let responseJSON = await response.json();
@@ -19,28 +44,32 @@ function Home(){
                 let userPosts = responseJSON.data;
 
                 userPosts.forEach(async(userPost,index)=>{
-                    let userSpecificPostURL = `/${userPost.id}?fields=id,media_type,media_url,username,timestamp&access_token=${accessToken}`;
-                    let URL = `${baseURL}${userSpecificPostURL}`;
+                    let idSpecificPostURL = `/${userPost.id}?fields=id,media_type,media_url,username,timestamp&access_token=${accessToken}`;
+                    let URL = `${baseURL}${idSpecificPostURL}`;
 
                     let response = await fetch(URL);
                     let responseJSON = await response.json();
 
                     userPosts[index] = {...userPost,...responseJSON};
                 });
-                setUserData(userPosts);           
+                setUserData(userPosts);
+                setUserDataCopy(userPosts);           
             })();
         }
     },[]);
 
     return (
-        userData && 
-        userData.map((post)=>{
-            return(
-            <span key={post.id}>
-                {post.caption}
-            </span>
-            )
-        })
+        <>
+            <Header location={location} history={history}  onSearchHandler = {onSearchHandler} {...props}></Header>
+
+        {
+            userData.map((post)=>{
+                return(
+                    <Post {...post} key={post.id}></Post>
+                )
+            })
+        }
+        </>
     )
     
 }

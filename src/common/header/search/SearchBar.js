@@ -13,8 +13,14 @@ function SearchBar(props){
     });
 
     const classes = useStyles(); 
+
+    const onChangeHandler = (e)=>{
+        const pattern = e.currentTarget.value;
+        props.onSearchHandler(pattern);
+    }
+
     return(
-        <Input className={classes["search-bar"]} type="search" placeholder='Search...' startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>} disableUnderline />
+        <Input className={classes["search-bar"]} type="search" placeholder='Search...' startAdornment={<InputAdornment position="start"><SearchIcon /></InputAdornment>} disableUnderline onChange={onChangeHandler} />
     )
 }
 
