@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Route,Switch,useHistory, useLocation} from "react-router-dom";
+import {Route,Switch} from "react-router-dom";
 
 
 import Login from "../../screens/login/Login";
