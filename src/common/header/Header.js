@@ -4,6 +4,8 @@ import LoggedInControls from "./loggedinControls/LoggedInControls";
 
 
 function Header(props){
+    console.log(props);
+    
    const useStyles = makeStyles({
        nav:{
            backgroundColor:"#263238",

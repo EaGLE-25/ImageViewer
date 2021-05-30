@@ -28,7 +28,7 @@ function CustomAvatar(props){
     return(
         <Fragment>
             <IconButton onClick={onProfilepicClick}>
-                   <Avatar className={classes["profile-pic"]} variant="circle" alt="profile picture"  src={props.profilepicURL}/>
+                   <Avatar className={classes["profile-pic"]} variant="circle" alt="profile picture"  src={props.profilePicURL}/>
                </IconButton>
                <Menu
                    anchorEl={anchorEl}
