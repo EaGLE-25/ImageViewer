@@ -3,3 +3,7 @@
     overflow:"hidden";
     text-overflow:"ellipsis";
 }
+
+.MuiPaper-root.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.MuiPaper-elevation24.MuiPaper-rounded{
+    max-width: 1000px;
+}
