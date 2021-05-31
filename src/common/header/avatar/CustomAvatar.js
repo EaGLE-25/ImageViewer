@@ -1,5 +1,6 @@
 import { Fragment,useState} from "react";
 import {IconButton,Avatar,Menu,MenuItem,makeStyles} from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 
 function CustomAvatar(props){
@@ -39,7 +40,12 @@ function CustomAvatar(props){
                    anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
                    transformOrigin={{ vertical: "top", horizontal: "center" }}
                >
-                   <MenuItem onClick={handleClose}>My account</MenuItem>
+                   {
+                       (props.location.pathname !== "/profile")? 
+                       <Link to="/profile" style={{textDecoration:"none",color:"inherit"}}>
+                            <MenuItem onClick={handleClose}>My account</MenuItem>
+                        </Link> : null
+                   }
                    <MenuItem onClick={onLogout}>Logout</MenuItem>
                </Menu>
         </Fragment>
