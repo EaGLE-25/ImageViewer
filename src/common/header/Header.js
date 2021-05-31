@@ -1,11 +1,10 @@
 import { makeStyles, Typography} from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 import LoggedInControls from "./loggedinControls/LoggedInControls";
 
 
-function Header(props){
-    console.log(props);
-    
+function Header(props){    
    const useStyles = makeStyles({
        nav:{
            backgroundColor:"#263238",
@@ -29,7 +28,9 @@ function Header(props){
        <nav className={classes.nav}>
            <div>
                 <Typography>
-                    <span className={classes["logo-text"]}>Image Viewer</span>
+                    <Link to="/home" style={{textDecoration:"none",color:"white"}}>
+                        <span className={classes["logo-text"]}>Image Viewer</span>
+                    </Link>
                 </Typography>
            </div>
            <LoggedInControls {...props}></LoggedInControls>
