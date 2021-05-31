@@ -10,7 +10,9 @@ import Header from "../../common/header/Header";
 const useStyles = makeStyles({
   loginContainer:{
     display:"flex",
-    justifyContent:"center"
+    justifyContent:"center",
+    height:"70vh",
+    alignItems:"center"
   },
   loginCard:{
     padding:"2rem",
