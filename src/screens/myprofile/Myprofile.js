@@ -1,6 +1,6 @@
 import {GridList,GridListTile,DialogContent,Button,DialogActions,Avatar, Box, Container, makeStyles, Typography, Dialog, DialogTitle, TextField, IconButton, FormHelperText } from "@material-ui/core";
 import {useState,useEffect} from "react";
-import { useHistory, useLocation } from "react-router";
+import { Redirect, useHistory, useLocation } from "react-router";
 import Header from "../../common/header/Header";
 import Post from "../home/post/Post";
 
@@ -132,6 +132,7 @@ function Myprofile(props){
 
     // render
     return(
+        (!sessionStorage.getItem("access-token")) ? <Redirect to="/" /> :
         <>
             <Header {...props} history={history} location={location} profilePicURL={profilePicURL}></Header>
             <Container maxWidth="md">
